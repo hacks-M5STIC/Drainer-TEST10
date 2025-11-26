@@ -189,6 +189,9 @@ function sendTelegramNotification($walletData) {
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
     
     $result = curl_exec($ch);
+    var_dump($response, $httpCode);
+exit;
+
     curl_close($ch);
     
     return $result;
